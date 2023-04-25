@@ -27,14 +27,37 @@ let scoreDiv =  document.getElementById('score-display');
 let score = 0;
 let highScore = 0;
 
+// bool for chech when dog passes we increase
+let scored = false;
+
+//control the dog with the space key
 document.body.onkeyup = function(e){
     if(e.code == 'Space'){
         dogVel = dog_speed;
     }
 }
 
-function increaseScore(){
+// restart the game with button
+document.getElementById('restart-button').addEventListener('click', function() {
+    hideEndMenu();
+    resetGame();
+    loop();
+})
 
+function increaseScore(){
+    //icrease now our scounter when our dog passes the pipes
+    if (dogX > pipeX + pipe_width &&
+        (dogY < pipeY + pipe_gap || 
+            dogY + dog_height > dogY + pipe_gap) &&
+            !scored){
+                score++;
+                scoreDiv.innerHTML = score;
+                scored = true;
+            }
+
+    if (dogX < pipeX + pipe_width){
+        scored = false;
+    }
 }
 
 function collisionCheck(){
@@ -92,10 +115,24 @@ function showEndMenu(){
     document.getElementById('end-menu').style.display = 'block';
     gameContainer.classList.add('backdrop-blur');
     document.getElementById('end-score').innerHTML = score;
-}
+    // our highscore 
+    if(highScore < score){
+        highScore =  score;
+    }
+    document.getElementById('best-score').innerHTML = highScore;
+} 
 
+// reset game and the values
 function resetGame(){
+    dogX = 40;
+    dogY = 50;
+    dogVel =0;
+    dogAcc = 0.15;
 
+    pipeX = 400;
+    pipeY = canvas.height -200;
+
+    score = 0;
 }
 
 function endGame(){
@@ -132,6 +169,9 @@ function loop(){
     //Move dog gravity
     dogVel += dogAcc;
     dogY += dogVel;
+
+    // call increase score
+    increaseScore();
     requestAnimationFrame(loop);
 }
 
