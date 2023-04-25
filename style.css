@@ -1,7 +1,7 @@
 body{
-    background-color: #73c8a9;
+    background-color: #2450a3;
     font-family: 'Press Start', cursive;
-    background-image: linear-gradient(to right, #73c8a9, #373b44);
+    background-image: linear-gradient(to right, #699ed7, #373b44);
 }
 
 canvas {
@@ -17,10 +17,46 @@ canvas {
     z-index: 1;
 }
 
+.backdrop-blur{
+    filter: blur(5px);
+}
+
 #end-menu{
-    display: block;
+    display: none;
     margin: 50px auto;
     width: 200px;
     padding: 20px;
     text-align: center;
+    background-color: rgb(21, 161, 98);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 59%);
+    z-index: 1000;
+}
+
+#score-display{
+    color: #fff;
+    font-size: 2em;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+button{
+    background-color: #5017ab;
+    border: #2e2e2e;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.25s ease;
+}
+
+button:hover{
+    background-color: #333;
+    transform:  translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
